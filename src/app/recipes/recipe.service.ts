@@ -33,6 +33,15 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice()); // emits the new array of recipes
   }
 
+  updateRecipe(name: string, newRecipe: Recipe) {
+    const index = this.recipes.findIndex((recipe) => recipe.name === name);
+
+    if (index !== -1) {
+      this.recipes[index] = newRecipe;
+      this.recipesChanged.next(this.recipes.slice());
+    }
+  }
+
   getRecipes() {
     return this.recipes.slice(); // return a new array which is an exact copy of the recipes array
   }
