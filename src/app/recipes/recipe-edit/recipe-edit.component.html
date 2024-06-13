@@ -58,8 +58,9 @@
           Please enter a valid description!
         </span>
       </div>
+      <hr/>
       <div class="row">
-        <div class="col-xs-12">
+        <div class="custom-row col-xs-12">
           <button
             [disabled]="!editForm.valid"
             type="submit"
@@ -67,6 +68,16 @@
           >
             Save
           </button>
+          <button
+            type="button"
+            class="btn btn-default"
+            (click)="onCancel()"
+            >Cancel</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDelete()"
+            >Delete</button>
         </div>
       </div>
     </form>

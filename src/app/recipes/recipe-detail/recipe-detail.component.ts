@@ -30,4 +30,9 @@ export class RecipeDetailComponent implements OnInit {
   onEditPress() {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
+
+  onDeletePress() {
+    this.recipeService.deleteRecipe(this.recipe.name);
+    this.router.navigate(['/recipes']);
+  }
 }

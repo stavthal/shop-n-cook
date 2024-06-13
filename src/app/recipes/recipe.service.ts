@@ -53,4 +53,13 @@ export class RecipeService {
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
   }
+
+  deleteRecipe(name: string) {
+    const index = this.recipes.findIndex((recipe) => recipe.name === name);
+
+    if (index !== -1) {
+      this.recipes.splice(index, 1);
+      this.recipesChanged.next(this.recipes.slice());
+    }
+  }
 }

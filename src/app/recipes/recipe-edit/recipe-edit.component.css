@@ -5,3 +5,9 @@
 input.ng-invalid .ng-touched {
   border: 1px solid red !important;
 }
+
+.custom-row {
+  flex: 1;
+  display: flex;
+  gap: 6px;
+}
