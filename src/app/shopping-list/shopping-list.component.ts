@@ -38,4 +38,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   onIngredientAdded(ingredient: Ingredient) {
     this.shoppinglistService.addIngredient(ingredient);
   }
+
+  onIngredientEdit(index: number) {
+    this.shoppinglistService.startedEditing.next(index);
+  }
 }
