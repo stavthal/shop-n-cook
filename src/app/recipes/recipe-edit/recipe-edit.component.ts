@@ -22,9 +22,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   ) {}
 
   editForm = new FormGroup({
-    name: new FormControl(null),
-    description: new FormControl(null),
-    imagePath: new FormControl(null),
+    name: new FormControl(null, Validators.required),
+    description: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(10),
+    ]),
+    imagePath: new FormControl(null, Validators.required),
   });
 
   ngOnInit() {
@@ -56,13 +59,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       // Edit the recipe
       this.recipeService.updateRecipe(this.name, newRecipe);
-      console.log(this.recipeService.getRecipes());
       this.router.navigate([`/recipes/${newRecipe.name}`], {
         relativeTo: this.route,
       });
     } else {
       // Add the recipe
-      this.recipeService.addRecipe(this.recipe);
+      this.recipeService.addRecipe(newRecipe);
       this.router.navigate(['../'], { relativeTo: this.route });
     }
   }

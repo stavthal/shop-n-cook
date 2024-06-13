@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <form (ngSubmit)="onSubmit()" [formGroup]="editForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="editForm" #f>
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -14,6 +14,12 @@
           class="form-control"
           formControlName="name"
         />
+        <span
+          class="help-block"
+          *ngIf="!editForm.get('name').valid && editForm.get('name').touched"
+        >
+          Please enter a valid name!
+        </span>
       </div>
       <div class="form-group">
         <label for="imagePath">Image URL</label>
@@ -24,6 +30,15 @@
           name="imagePath"
           formControlName="imagePath"
         />
+        <span
+          class="help-block"
+          *ngIf="
+            !editForm.get('imagePath').valid &&
+            editForm.get('imagePath').touched
+          "
+        >
+          Please enter a valid image URL!
+        </span>
       </div>
       <div class="form-group">
         <label for="description">Description</label>
@@ -33,10 +48,25 @@
           name="description"
           formControlName="description"
         ></textarea>
+        <span
+          class="help-block"
+          *ngIf="
+            !editForm.get('description').valid &&
+            editForm.get('description').touched
+          "
+        >
+          Please enter a valid description!
+        </span>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button type="submit" class="btn btn-success">Save</button>
+          <button
+            [disabled]="!editForm.valid"
+            type="submit"
+            class="btn btn-success"
+          >
+            Save
+          </button>
         </div>
       </div>
     </form>
