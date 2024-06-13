@@ -58,6 +58,23 @@
           Please enter a valid description!
         </span>
       </div>
+
+      <div formArrayName="ingredients">
+        <label>Ingredients</label>
+        <div class="form-group" *ngFor="let ingredientCtrl of ingredientsControls; let i = index" [formGroupName]="i">
+          <div class="no-left-padding col-xs-8">
+            <input class="form-control" type="text" formControlName="name" placeholder="Ingredient Name"/>
+          </div>
+          <div class="col-xs-2">
+            <input class="form-control" type="number" formControlName="amount" placeholder="Amount"/>
+          </div>
+          <div class="col-xs-2">
+            <button (click)="onRemoveIngredient(i)" class="btn btn-danger">X</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-default" style="margin-top: 10px;" type="button" (click)="onAddIngredient()">Add Ingredient</button>
       <hr/>
       <div class="row">
         <div class="custom-row col-xs-12">
