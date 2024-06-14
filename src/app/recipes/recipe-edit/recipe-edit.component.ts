@@ -112,4 +112,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   get ingredientsControls() {
     return (this.editForm.get('ingredients') as FormArray).controls;
   }
+
+  onClearIngredients() {
+    (this.editForm.get('ingredients') as FormArray).clear();
+  }
 }
