@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from '../../shared/ingredient-model';
-import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -43,7 +43,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       if (this.recipe['ingredients']) {
         for (let ingredient of this.recipe.ingredients) {
           (this.editForm.get('ingredients') as FormArray).push(
-            this.initIngredientForm(ingredient)
+            this.initIngredientForm(ingredient),
           );
         }
       }
@@ -58,25 +58,23 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
   initIngredientForm(ingredient: Ingredient): FormGroup {
     return new FormGroup({
-      'name': new FormControl(ingredient.name, Validators.required),
-      'amount': new FormControl(ingredient.amount, [
+      name: new FormControl(ingredient.name, Validators.required),
+      amount: new FormControl(ingredient.amount, [
         Validators.required,
-        Validators.pattern(/^[1-9]+[0-9]*$/)
-      ])
+        Validators.pattern(/^[1-9]+[0-9]*$/),
+      ]),
     });
   }
 
   onAddIngredient() {
     (this.editForm.get('ingredients') as FormArray).push(
-      this.initIngredientForm({name: '', amount: 1})
+      this.initIngredientForm({ name: '', amount: 1 }),
     );
   }
 
   onRemoveIngredient(index: number) {
     (this.editForm.get('ingredients') as FormArray).removeAt(index);
   }
-
-
 
   ngOnDestroy() {}
 
@@ -85,8 +83,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       this.editForm.value['name'],
       this.editForm.value['description'],
       this.editForm.value['imagePath'],
-      this.editForm.value['ingredients']
-      );
+      this.editForm.value['ingredients'],
+    );
 
     if (this.editMode) {
       // Edit the recipe
@@ -109,7 +107,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   onCancel() {
     this.router.navigate(['/recipes']);
   }
-
 
   // Getter
   get ingredientsControls() {
